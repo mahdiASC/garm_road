@@ -1,5 +1,10 @@
 class ReviewController < ApplicationController
     get '/reviews' do
-      "reviews"
+      erb :index
     end
+
+    #create new review (post)
+    #edit review (patch)
+    #delete review (user's)
+
 end
