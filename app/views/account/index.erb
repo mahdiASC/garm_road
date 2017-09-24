@@ -1,0 +1,55 @@
+<h2>All Items</h2>
+<table>
+  <tr>
+    <th>Item name</th>
+    <th>Condition</th>
+    <th>Type</th>
+    <th>Image</th>
+    <th>Currently held by</th>
+    <th>Edit</th>
+  </tr>
+
+  <%Item.all.each do |item|%>
+    <tr>
+      <td><a href="/items/<%=item.id%>"><%=item.name%></a></td>
+      <td><%=item.condition%></td>
+      <td><%=item.item_type%></td>
+      <td><img src="<%=item.img%>"></td>
+      <td><%=User.find(item.current_possessor_user_id).username%></td>
+      <td>
+        <%if current_user == item.user%>
+          <a href="/items/<%=item.id%>/item">Edit</a>
+        <%else%>
+          N/A
+        <%end%>
+      </td>
+    </tr>
+  <%end%>
+</table>
+<!--
+<%if current_user==@user_db%>
+  <h3>Add Item:</h3>
+  <form action="/items" method="post">
+    <input id="hidden" type="text" name="item[user_id]" value="<%=current_user.id%>">
+
+    <label>Name:</label>
+    <input type="text" name="item[name]" value="">
+    </br>
+
+    <label>Condition:</label>
+    <input type="text" name="item[condition]" value="">
+    </br>
+
+    <label>Type:</label>
+    <input type="text" name="item[item_type]" value="">
+    </br>
+    <label>Image url:</label>
+    <input type="text" name="item[img]" value="">
+    </br>
+    <label>Currently possessed by:</label>
+    <input type="text" name="item[current_possessor_user_id]" value="">
+    </br>
+
+    <input type="submit" value="Add Item">
+  </form>
+<%end%> -->

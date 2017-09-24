@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Garm Road</title>
+    <link rel="stylesheet" href=<%=url("/css/style.css")%>>
 </head>
 <body>
+  <!-- include nav-bar -->
+  <!-- include header (with user name) -->
+  <%if logged_in?%>
+    <h2>Welcome, <%=current_user.username%></h2>
+    <!-- -allow user to edit user profile -->
+  <%end%>
+  <!-- include logout option -->
     <%=yield%>
 </body>
 </html>

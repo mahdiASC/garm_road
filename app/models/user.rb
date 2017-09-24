@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates :username, :email, :password, presence: true
+  #would need unique emails and usernames
+  validates :username, :email, :password, :location, presence: true
   has_many :items
   has_many :reviews
+  after_initialize :set_defaults
 
   def slug
     self.username.split.join("-")
@@ -12,5 +14,9 @@ class User < ActiveRecord::Base
       self.all.select do |user|
           user.slug==slugged_username
       end.first
+  end
+
+  def set_defaults
+    self.img ||= 'http://via.placeholder.com/150x150'
   end
 end

@@ -1,6 +1,14 @@
 class ItemController < ApplicationController
+    # get '/items' do
+    #   erb :index
+    # end
+
     get '/items' do
-      erb :index
+      if logged_in?
+        erb :'items/index'
+      else
+        redirect "/login"
+      end
     end
 
     #view all items (contains reviews)

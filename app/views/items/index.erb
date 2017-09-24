@@ -1,0 +1,20 @@
+<h2>Your Items</h2>
+<table>
+  <tr>
+    <th>Item name</th>
+    <th>Condition</th>
+    <th>Type</th>
+    <th>Image</th>
+    <th>Currently held by</th>
+  </tr>
+
+  <%@user_db.items.each do |item|%>
+    <tr>
+      <td><a href="/items/<%=item.id%>"><%=item.name%></a></td>
+      <td><%=item.condition%></td>
+      <td><%=item.item_type%></td>
+      <td><img src="<%=item.img%>"></td>
+      <td><%=User.find_by(item.current_possessor_user_id.to_s).username%></td>
+    </tr>
+  <%end%>
+</table>

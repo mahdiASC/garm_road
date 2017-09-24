@@ -1,0 +1,7 @@
+body{
+  background-color: lightblue;
+}
+
+td > img{
+  width:100px;
+}
