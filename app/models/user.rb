@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   end
 
   def set_defaults
-    self.img ||= 'http://via.placeholder.com/150x150'
+    if self.img.empty?
+      self.img = 'http://via.placeholder.com/150x150'
+    end
   end
 end

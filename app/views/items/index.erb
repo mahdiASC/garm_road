@@ -1,20 +1,30 @@
-<h2>Your Items</h2>
+<h2>All Items</h2>
 <table>
   <tr>
     <th>Item name</th>
     <th>Condition</th>
     <th>Type</th>
     <th>Image</th>
+    <th>Original Owner</th>
     <th>Currently held by</th>
+    <th>Edit</th>
   </tr>
 
-  <%@user_db.items.each do |item|%>
+  <%Item.all.each do |item|%>
     <tr>
       <td><a href="/items/<%=item.id%>"><%=item.name%></a></td>
       <td><%=item.condition%></td>
       <td><%=item.item_type%></td>
-      <td><img src="<%=item.img%>"></td>
-      <td><%=User.find_by(item.current_possessor_user_id.to_s).username%></td>
+<td><a href="<%=item.img%>" target="_blank"><img src="<%=item.img%>"></a></td>      <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
+      <%holder = User.find(item.current_possessor_user_id)%>
+      <td><a href="/users/<%=holder.slug%>"><%=holder.username%></a></td>
+      <td>
+        <%if current_user == item.user%>
+          <a href="/items/<%=item.id%>/item">Edit</a>
+        <%else%>
+          N/A
+        <%end%>
+      </td>
     </tr>
   <%end%>
 </table>

@@ -1,0 +1,88 @@
+<!-- Items owned -->
+<%if !@user_db.items.empty?%>
+  <%if current_user==@user_db%>
+    <h2>Your Items</h2>
+    <a href="/items/new">Add New Item</a>
+  <%else%>
+    <h2><%=@user_db.username%>'s Items</h2>
+  <%end%>
+  <table>
+    <tr>
+      <th>Item name</th>
+      <th>Condition</th>
+      <th>Type</th>
+      <th>Image</th>
+      <th>Original Owner</th>
+      <th>Currently held by</th>
+      <th>Edit</th>
+    </tr>
+
+    <%@user_db.items.each do |item|%>
+      <tr>
+        <td><a href="/items/<%=item.id%>"><%=item.name%></a></td>
+        <td><%=item.condition%></td>
+        <td><%=item.item_type%></td>
+        <td><a href="<%=item.img%>" target="_blank"><img src="<%=item.img%>"></a></td>
+        <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
+        <%holder = User.find(item.current_possessor_user_id)%>
+        <td><a href="/users/<%=holder.slug%>"><%=holder.username%></a></td>
+        <td>
+          <%if current_user == item.user%>
+            <a href="/items/<%=item.id%>/item">Edit</a>
+          <%else%>
+            N/A
+          <%end%>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+<%else%>
+  <%if current_user==@user_db%>
+    <h2>You have no items</h2>
+    <a href="/items/new">Add New Item</a>
+  <%else%>
+    <h2><%=@user_db.username%> has no items</h2>
+  <%end%>
+<%end%>
+
+
+
+<!-- Items borrowed -->
+<%if !@borrowed_items.empty?%>
+  <%if current_user==@user_db%>
+    <h2>Your Borrowed Items</h2>
+  <%else%>
+    <h2><%=@user_db.username%>'s Borrowed Items</h2>
+  <%end%>
+
+  <table>
+    <tr>
+      <th>Item name</th>
+      <th>Condition</th>
+      <th>Type</th>
+      <th>Image</th>
+      <th>Original Owner</th>
+      <%if current_user == @user_db%>
+        <th>Review</th>
+      <%end%>
+    </tr>
+
+    <%@borrowed_items.each do |item|%>
+      <tr>
+        <td><a href="/items/<%=item.id%>"><%=item.name%></a></td>
+        <td><%=item.condition%></td>
+        <td><%=item.item_type%></td>
+<td><a href="<%=item.img%>" target="_blank"><img src="<%=item.img%>"></a></td>        <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
+        <%if current_user == @user_db%>
+          <td><a href="/items/<%=item.id%>/new_review">Review</a></td>
+        <%end%>
+      </tr>
+    <%end%>
+  </table>
+<%else%>
+  <%if current_user==@user_db%>
+    <h2>You have not borrowed items</h2>
+  <%else%>
+    <h2><%=@user_db.username%> has no borrowed items</h2>
+  <%end%>
+<%end%>

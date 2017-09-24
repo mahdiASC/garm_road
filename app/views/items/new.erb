@@ -1,0 +1,25 @@
+<h3>Add Item:</h3>
+<h4>Note: * means required</h4>
+<%if !!params[:status]%>
+  <p>Warning! Could not add invalid Item</p>
+<%end%>
+<form action="/account/<%=current_user.slug%>" method="post">
+  <input type="hidden" type="text" name="item[user_id]" value="<%=current_user.id%>">
+  <input type="hidden" type="text" name="item[current_possessor_user_id]" value="<%=current_user.id%>">
+
+  <label>Name*:</label>
+  <input type="text" name="item[name]" value="">
+  </br>
+
+  <label>Condition*:</label>
+  <input type="text" name="item[condition]" value="">
+  </br>
+
+  <label>Type*:</label>
+  <input type="text" name="item[item_type]" value="">
+  </br>
+  <label>Image url:</label>
+  <input type="text" name="item[img]" value="">
+  </br>
+  <input type="submit" value="Add Item">
+</form>

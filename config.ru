@@ -6,7 +6,7 @@ end
 
 
 run ApplicationController
-use AccountController
+use UserController
 use ItemController
 use ReviewController
 use Rack::MethodOverride

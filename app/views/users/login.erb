@@ -1,5 +1,8 @@
 <a href="/signup">Signup</a>
 </br>
+<%if !!params[:status]%>
+  <p>Warning! Invalid Login credentials</p>
+<%end%>
 <form action="/login" method='post'>
     <label>Username:</label>
     <input type="text" name='username' value='bob'>
