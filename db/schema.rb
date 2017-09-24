@@ -10,6 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924031228) do
+ActiveRecord::Schema.define(version: 20170924050528) do
+
+  create_table "items", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "condition"
+    t.string "item_type"
+    t.string "img"
+    t.integer "current_possessor_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.string "review"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.string "location"
+    t.string "img"
+    t.string "details"
+  end
 
 end
