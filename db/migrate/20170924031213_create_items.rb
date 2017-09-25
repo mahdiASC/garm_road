@@ -5,6 +5,7 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :condition
       t.string :item_type
+      t.string :desc
       t.string :img
       t.integer :current_possessor_user_id
     end

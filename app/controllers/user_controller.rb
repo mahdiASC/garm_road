@@ -40,8 +40,31 @@ class UserController < ApplicationController
       end
     end
 
-    post '/users/:slug/edit' do
 
+    get '/users/:slug/edit' do
+      if logged_in?
+        @user_db = User.find_by_slug(params[:slug])
+        if @user_db==current_user
+          erb :'users/edit'
+        else
+          session[:error] = "You do not have permission to edit that user's profile"
+          redirect "/users/#{@user_db.slug}"
+        end
+      else
+        redirect '/login'
+      end
+    end
+
+    post '/users/:slug/edit' do
+      if params[:user][:password].empty?
+        params[:user].delete('password')
+      end
+
+      user = User.find_by_slug(params[:slug])
+      params[:user].each do |key,value|
+        user.update_attribute(key.to_s, value)
+      end
+      redirect "/users/#{params[:slug]}"
     end
 
     get "/login" do
@@ -55,27 +78,19 @@ class UserController < ApplicationController
     post "/login" do
       #username or email valid for logging in?
       user = User.find_by(:username=>params[:username])
+      # binding.pry
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
         redirect "/users/#{user.slug}"
       else
-        redirect '/login?status=error'
+        session[:error] = "Invalid Login credentials"
+        redirect '/login'
       end
     end
-
-    # get "/failure" do
-    #
-    #   erb :failure
-    # end
 
     get "/logout" do
       session.clear
       redirect "/"
     end
-    # log in
-    # failure
-    # logout
-    # show any user's account details
-    # edit account details
 
 end

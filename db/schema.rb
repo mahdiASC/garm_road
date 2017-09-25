@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20170924050528) do
     t.string "name"
     t.string "condition"
     t.string "item_type"
+    t.string "desc"
     t.string "img"
     t.integer "current_possessor_user_id"
   end

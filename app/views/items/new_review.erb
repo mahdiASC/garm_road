@@ -1,0 +1,51 @@
+
+<h2>New Review</h2>
+<table>
+  <tr>
+    <th>Item name</th>
+    <th>Condition</th>
+    <th>Type</th>
+    <th>Image</th>
+    <th>Original Owner</th>
+  </tr>
+
+    <tr>
+      <td><%=@item.name%></td>
+      <td><%=@item.condition%></td>
+      <td><%=@item.item_type%></td>
+      <td><a href="<%=@item.img%>" target="_blank"><img src="<%=@item.img%>"></a></td>
+      <td><a href="/users/<%=@item.user.slug%>"><%=@item.user.username%></a></td>
+    </tr>
+</table>
+
+<!-- new review -->
+
+<%if !@item.reviews.empty?%>
+  <h3>Reviews</h3>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Review</th>
+    </tr>
+
+    <%@item.reviews.each do |review|%>
+      <tr>
+        <td><%=review.user.username%></td>
+        <td><%=review.review%></td>
+      </tr>
+    <%end%>
+  </table>
+<%else%>
+<h3>There are no reviews for this item, yet</h3>
+<%end%>
+<%if current_user == @item.user%>
+  <h3>You cannot review your own items. Include your comments in your item's description.</h3>
+<%else%>
+  <form action="/items/<%=@item.id%>/new_review" method="post">
+    <input type="hidden" type="text" name="review[user_id]" value="<%=current_user.id%>">
+    <input type="hidden" type="text" name="review[item_id]" value="<%=@item.id%>">
+
+    <textarea name="review[review]" rows="4" cols="40"></textarea>
+    <input type="submit" value="Add a review">
+  </form>
+<%end%>

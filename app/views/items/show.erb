@@ -1,0 +1,49 @@
+<%if !!session[:error]%>
+  <h3>Error: <%=session[:error]%></h3>
+  <!-- clearing error -->
+  <%session.delete('error')%>
+<%end%>
+<h2><%=@item.name%></h2>
+<a href="<%=@item.img%>" target ="_blank"><img src="<%=@item.img%>"></a>
+
+<p>Original owner: <%=@item.user.username%></p>
+
+<%holder = User.find(@item.current_possessor_user_id)%>
+
+<p>Currently held by: <%=holder.username%></p>
+<h3>Condition:</h3>
+<p><%=@item.condition%></p>
+
+<h3>Type:</h3>
+<p><%=@item.item_type%></p>
+
+<h3>Condition:</h3>
+<p><%=@item.condition%></p>
+
+<h3>Description:</h3>
+<p><%=@item.desc%></p>
+
+<%if !@item.reviews.empty?%>
+  <h3>Reviews</h3>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Review</th>
+    </tr>
+
+    <%@item.reviews.each do |review|%>
+      <tr>
+        <td><%=review.user.username%></td>
+        <td><%=review.review%></td>
+      </tr>
+    <%end%>
+  </table>
+<%else%>
+<h3>There are no reviews for this item</h3>
+<%end%>
+
+<%if holder == current_user && holder!=@item.user%>
+<a href="/items/<%=@item.id%>/new_review"></a>
+<%elsif @item.user == current_user%>
+<a href="/items/<%=@item.id%>/edit">Edit Item</a>
+<%end%>

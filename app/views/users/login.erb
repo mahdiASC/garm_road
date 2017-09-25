@@ -1,7 +1,10 @@
 <a href="/signup">Signup</a>
 </br>
-<%if !!params[:status]%>
-  <p>Warning! Invalid Login credentials</p>
+
+<%if !!session[:error]%>
+  <h3>Error: <%=session[:error]%></h3>
+  <!-- clearing error -->
+  <%session.delete('error')%>
 <%end%>
 <form action="/login" method='post'>
     <label>Username:</label>

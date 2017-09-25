@@ -1,4 +1,14 @@
+<%if !!session[:error]%>
+  <h3>Error: <%=session[:error]%></h3>
+  <!-- clearing error -->
+  <%session.delete('error')%>
+<%end%>
 <h2><%=@user_db.username%>'s Profile</h2>
+
+<%if current_user==@user_db%>
+  <a href="/users/<%=current_user.slug%>/edit">Edit Profile</a>
+</br>
+<%end%>
 <img src="<%=@user_db.img%>" alt="">
 
 <article>

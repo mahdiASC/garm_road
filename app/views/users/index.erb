@@ -14,7 +14,7 @@
       <th>Image</th>
       <th>Original Owner</th>
       <th>Currently held by</th>
-      <th>Edit</th>
+      <!-- <th>Edit</th> -->
     </tr>
 
     <%@user_db.items.each do |item|%>
@@ -26,13 +26,13 @@
         <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
         <%holder = User.find(item.current_possessor_user_id)%>
         <td><a href="/users/<%=holder.slug%>"><%=holder.username%></a></td>
-        <td>
+        <!-- <td>
           <%if current_user == item.user%>
-            <a href="/items/<%=item.id%>/item">Edit</a>
+            <a href="/items/<%=item.id%>">Edit</a>
           <%else%>
             N/A
           <%end%>
-        </td>
+        </td> -->
       </tr>
     <%end%>
   </table>

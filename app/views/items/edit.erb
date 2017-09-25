@@ -1,0 +1,39 @@
+<h3>Edit Item:</h3>
+<h4>Note: * means required</h4>
+
+<form action="/items/<%=@item.id%>/edit" method="post">
+  <!-- send patch request -->
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <input type="hidden" type="text" name="item[user_id]" value="<%=current_user.id%>">
+  <input type="hidden" type="text" name="item[current_possessor_user_id]" value="<%=current_user.id%>">
+
+  <label>Name*:</label>
+  <input type="text" name="item[name]" value="<%=@item.name%>">
+  </br>
+
+  <label>Condition*:</label>
+  <input type="text" name="item[condition]" value="<%=@item.condition%>">
+  </br>
+
+  <label>Description:</label>
+  <input type="text" name="item[desc]" value="<%=@item.desc%>">
+  </br>
+
+  <!-- Could make Type its own class to select checkbox from -->
+  <label>Type*:</label>
+  <input type="text" name="item[item_type]" value="<%=@item.item_type%>">
+  </br>
+
+  <label>Image url:</label>
+  <input type="text" name="item[img]" value="<%=@item.img%>">
+  </br>
+
+  <input type="submit" value="Update Item">
+</form>
+
+<form action="/items/<%=@item.id%>/delete" method="post">
+  <!-- send delete request -->
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Item">
+</form>
