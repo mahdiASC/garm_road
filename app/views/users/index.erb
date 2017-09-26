@@ -14,7 +14,7 @@
       <th>Image</th>
       <th>Original Owner</th>
       <th>Currently held by</th>
-      <!-- <th>Edit</th> -->
+      <th>Request</th>
     </tr>
 
     <%@user_db.items.each do |item|%>
@@ -26,13 +26,15 @@
         <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
         <%holder = User.find(item.current_possessor_user_id)%>
         <td><a href="/users/<%=holder.slug%>"><%=holder.username%></a></td>
-        <!-- <td>
-          <%if current_user == item.user%>
-            <a href="/items/<%=item.id%>">Edit</a>
+        <td>
+          <%if current_user != holder%>
+            <form action="/items/<%=item.id%>/request" method="post">
+              <input type="submit" value="Request">
+            </form>
           <%else%>
             N/A
           <%end%>
-        </td> -->
+        </td>
       </tr>
     <%end%>
   </table>
@@ -62,6 +64,7 @@
       <th>Type</th>
       <th>Image</th>
       <th>Original Owner</th>
+      <th>Request</th>
       <%if current_user == @user_db%>
         <th>Review</th>
       <%end%>
@@ -72,7 +75,20 @@
         <td><a href="/items/<%=item.id%>"><%=item.name%></a></td>
         <td><%=item.condition%></td>
         <td><%=item.item_type%></td>
-<td><a href="<%=item.img%>" target="_blank"><img src="<%=item.img%>"></a></td>        <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
+        <td><a href="<%=item.img%>" target="_blank"><img src="<%=item.img%>"></a></td>
+        <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
+        <!-- request -->
+        <td>
+          <%holder = User.find(item.current_possessor_user_id)%>
+          <%if current_user != holder%>
+            <form action="/items/<%=item.id%>/request" method="post">
+              <input type="submit" value="Request">
+            </form>
+          <%else%>
+            N/A
+          <%end%>
+        </td>
+        <!-- review -->
         <%if current_user == @user_db%>
           <td><a href="/items/<%=item.id%>/new_review">Review</a></td>
         <%end%>

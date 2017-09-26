@@ -32,6 +32,15 @@ class ItemController < ApplicationController
       redirect "/users/#{current_user.slug}/items"
     end
 
+    post '/items/:id/request' do
+      #Will want to build this out with its own model and db
+      #For now just changes the posessor to current_user
+      @item = Item.find(params[:id])
+      @item.current_possessor_user_id = current_user.id
+      @item.save
+      redirect "/items/#{params[:id]}"
+    end
+
     get '/items/:id/new_review' do
       if logged_in?
         @item = Item.find(params[:id])
