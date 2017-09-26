@@ -23,9 +23,32 @@
         <td><%=item.condition%></td>
         <td><%=item.item_type%></td>
         <td><a href="<%=item.img%>" target="_blank"><img src="<%=item.img%>"></a></td>
-        <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
+
+        <!-- original owner -->
+        <td>
+          <a href="/users/<%=item.user.slug%>">
+            <div>
+              <img src="<%=item.user.img%>" class="centered-and-cropped">
+              </br>
+              <%=item.user.username%>
+            </div>
+
+          </a>
+        </td>
+
+        <!-- current holder -->
         <%holder = User.find(item.current_possessor_user_id)%>
-        <td><a href="/users/<%=holder.slug%>"><%=holder.username%></a></td>
+        <td>
+          <a href="/users/<%=holder.slug%>">
+            <div>
+              <img src="<%=holder.img%>" class="centered-and-cropped">
+              </br>
+              <%=holder.username%>
+            </div>
+
+          </a>
+        </td>
+
         <td>
           <%if current_user != holder%>
             <form action="/items/<%=item.id%>/request" method="post">
@@ -76,7 +99,16 @@
         <td><%=item.condition%></td>
         <td><%=item.item_type%></td>
         <td><a href="<%=item.img%>" target="_blank"><img src="<%=item.img%>"></a></td>
-        <td><a href="/users/<%=item.user.slug%>"><%=item.user.username%></a></td>
+        <td>
+          <a href="/users/<%=item.user.slug%>">
+            <div>
+              <img src="<%=item.user.img%>" class="centered-and-cropped">
+              </br>
+              <%=item.user.username%>
+            </div>
+
+          </a>
+        </td>
         <!-- request -->
         <td>
           <%holder = User.find(item.current_possessor_user_id)%>

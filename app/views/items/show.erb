@@ -3,25 +3,26 @@
   <!-- clearing error -->
   <%session.delete('error')%>
 <%end%>
-<h2><%=@item.name%></h2>
-<a href="<%=@item.img%>" target ="_blank"><img src="<%=@item.img%>"></a>
 
-<p>Original owner: <%=@item.user.username%></p>
+<div class="item-container">
+  <article class="thumb">
+    <h2><%=@item.name%></h2>
+    <a href="<%=@item.img%>" target ="_blank"><img src="<%=@item.img%>"></a>
 
-<%holder = User.find(@item.current_possessor_user_id)%>
+    <p>Original owner: <a href="users/<%=@item.user.slug%>"><%=@item.user.username%></a></p>
 
-<p>Currently held by: <%=holder.username%></p>
-<h3>Condition:</h3>
-<p><%=@item.condition%></p>
+    <%holder = User.find(@item.current_possessor_user_id)%>
+    <p>Currently held by: <a href="users/<%=holder.slug%>"><%=holder.username%></a></p>
+  </article>
 
-<h3>Type:</h3>
-<p><%=@item.item_type%></p>
-
-<h3>Condition:</h3>
-<p><%=@item.condition%></p>
-
-<h3>Description:</h3>
-<p><%=@item.desc%></p>
+  <article class="thumb">
+    <h3>Stats</h3>
+    <p>Condition: <%=@item.condition%></p>
+    <p>Type: <%=@item.item_type%></p>
+    <p>Condition: <%=@item.condition%></p>
+    <p>Description: <%=@item.desc%></p>
+  </article>
+</div>
 
 <%if !@item.reviews.empty?%>
   <h3>Reviews</h3>

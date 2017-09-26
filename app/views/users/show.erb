@@ -5,21 +5,18 @@
 <%end%>
 <h2><%=@user_db.username%>'s Profile</h2>
 
-<%if current_user==@user_db%>
-  <a href="/users/<%=current_user.slug%>/edit">Edit Profile</a>
-</br>
-<%end%>
-<img src="<%=@user_db.img%>" alt="">
+<article class="container">
+  <div>
+    <img src="<%=@user_db.img%>" alt="">
+  </div>
 
-<article>
-  <header>
-    Location:
-  </header>
-  <p><%=@user_db.location%></p>
-  <header>
-    Details:
-  </header>
-  <p><%=@user_db.details%></p>
-</br>
-  <a href="/users/<%=@user_db.slug%>/items">View <%=@user_db.username%>'s Items</a>
+  <div>
+    <h3>Location: <%=@user_db.location%></h3>
+    <h3>Details: <%=@user_db.details%></h3>
+    <a href="/users/<%=@user_db.slug%>/items">View <%=@user_db.username%>'s Items</a>
+    <%if current_user==@user_db%>
+      </br>
+      <a href="/users/<%=current_user.slug%>/edit">Edit My Profile</a>
+    <%end%>
+  </div>
 </article>

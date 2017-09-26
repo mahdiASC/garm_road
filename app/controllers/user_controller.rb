@@ -33,7 +33,7 @@ class UserController < ApplicationController
     get '/users/:slug/items' do
       if logged_in?
         @user_db = User.find_by_slug(params[:slug])
-        @borrowed_items = Item.all.select{|item| item.current_possessor_user_id == @user_db.id}
+        @borrowed_items = Item.all.select{|item| item.current_possessor_user_id == @user_db.id && item.user_id != @user_db.id}
         erb :'users/index'
       else
         redirect '/login'
