@@ -1,3 +1,4 @@
+<%holder = User.find(@item.current_possessor_user_id)%>
 <%if !!session[:error]%>
   <h3>Error: <%=session[:error]%></h3>
   <!-- clearing error -->
@@ -9,10 +10,9 @@
     <h2><%=@item.name%></h2>
     <a href="<%=@item.img%>" target ="_blank"><img src="<%=@item.img%>"></a>
 
-    <p>Original owner: <a href="users/<%=@item.user.slug%>"><%=@item.user.username%></a></p>
+    <p>Original owner: <a href="/users/<%=@item.user.slug%>"><%=@item.user.username%></a></p>
 
-    <%holder = User.find(@item.current_possessor_user_id)%>
-    <p>Currently held by: <a href="users/<%=holder.slug%>"><%=holder.username%></a></p>
+    <p>Currently held by: <a href="/users/<%=holder.slug%>"><%=holder.username%></a></p>
   </article>
 
   <article class="thumb">
@@ -44,7 +44,7 @@
 <%end%>
 
 <%if holder == current_user && holder!=@item.user%>
-<a href="/items/<%=@item.id%>/new_review"></a>
+  <a href="/items/<%=@item.id%>/new_review">Write a Review</a>
 <%elsif @item.user == current_user%>
-<a href="/items/<%=@item.id%>/edit">Edit Item</a>
+  <a href="/items/<%=@item.id%>/edit">Edit Item</a>
 <%end%>

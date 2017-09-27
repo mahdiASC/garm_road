@@ -1,4 +1,4 @@
-<a href="/signup">Signup</a>
+<a href="/signup">Go to Signup instead</a>
 </br>
 
 <%if !!session[:error]%>
@@ -8,11 +8,11 @@
 <%end%>
 <form action="/login" method='post'>
     <label>Username:</label>
-    <input type="text" name='username' value='bob'>
+    <input type="text" name='username' value=''>
 
     </br>
     <label>Password:</label>
-    <input type="password" name='password' value='bob'>
+    <input type="password" name='password' value=''>
     </br>
     <input type="submit" value="Login">
 </form>

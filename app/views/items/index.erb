@@ -19,11 +19,11 @@
 
       <!-- original owner -->
       <td>
-        <a href="/users/<%=item.user.slug%>">
+        <a class="item-column" href="/users/<%=item.user.slug%>">
           <div>
             <img src="<%=item.user.img%>" class="centered-and-cropped">
             </br>
-            <%=item.user.username%>
+            <p><%=item.user.username%></p>
           </div>
 
         </a>
@@ -32,11 +32,11 @@
       <!-- current holder -->
       <%holder = User.find(item.current_possessor_user_id)%>
       <td>
-        <a href="/users/<%=holder.slug%>">
+        <a class="item-column" href="/users/<%=holder.slug%>">
           <div>
             <img src="<%=holder.img%>" class="centered-and-cropped">
             </br>
-            <%=holder.username%>
+            <p><%=holder.username%></p>
           </div>
 
         </a>

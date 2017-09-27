@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   #would need unique emails and usernames
   validates :username, :email, :password, :location, presence: true
+  validates :username, :email, uniqueness: true
   has_many :items
   has_many :reviews
   after_initialize :set_defaults
