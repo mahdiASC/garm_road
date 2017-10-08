@@ -11,7 +11,7 @@
   <!-- include nav-bar -->
   <!-- include header (with user name) -->
   <%if logged_in?%>
-    <h2>Welcome, <%=current_user.username%></h2>
+    <h2>Welcome, <%= current_user.username %></h2>
     <nav>
       <a href="/items">View All Items</a> |
       <a href="/users/<%=current_user.slug%>/items">View My Items</a> |

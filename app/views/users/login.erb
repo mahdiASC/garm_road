@@ -1,15 +1,14 @@
 <a href="/signup">Go to Signup instead</a>
 </br>
 
-<%if !!session[:error]%>
+<%if session[:error]%>
   <h3>Error: <%=session[:error]%></h3>
   <!-- clearing error -->
   <%session.delete('error')%>
 <%end%>
 <form action="/login" method='post'>
     <label>Username:</label>
-    <input type="text" name='username' value=''>
-
+    <input type="text" name='username' value = "<%= @username%>">
     </br>
     <label>Password:</label>
     <input type="password" name='password' value=''>

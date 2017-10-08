@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
   #would need unique emails and usernames
-  validates :username, :email, :password, :location, presence: true
+  # validates :username, :email, :password, :location, presence: true
+  validates :username, :email, :password, presence: true
   validates :username, :email, uniqueness: true
   has_many :items
   has_many :reviews
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def set_defaults
-    if self.img.empty?
+    if !self.img
       self.img = 'http://via.placeholder.com/150x150'
     end
   end

@@ -6,6 +6,6 @@ end
 
 # Order matters!
 use Rack::MethodOverride
-run ApplicationController
 use UserController
 use ItemController
+run ApplicationController

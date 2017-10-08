@@ -47,4 +47,10 @@
   <a href="/items/<%=@item.id%>/new_review">Write a Review</a>
 <%elsif @item.user == current_user%>
   <a href="/items/<%=@item.id%>/edit">Edit Item</a>
+
+  <form action="/items/<%=@item.id%>/delete" method="post">
+    <!-- send delete request -->
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Item">
+  </form>
 <%end%>

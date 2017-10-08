@@ -1,3 +1,8 @@
+<%if !!session[:error]%>
+  <h3 style="color:red;">Error: <%=session[:error]%></h3>
+  <!-- clearing error -->
+  <%session.delete('error')%>
+<%end%>
 <!-- Items owned -->
 <%if !@user_db.items.empty?%>
   <%if current_user==@user_db%>

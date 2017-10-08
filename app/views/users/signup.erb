@@ -1,28 +1,31 @@
 <a href="/login">Go to Login instead</a>
+<% if @failure_message %>
+  <p style="color: red"><%= @failure_message %></p>
+<% end %>
 </br>
 <form action="/signup" method='post'>
     <label>Username:</label>
-    <input type="text" name='user[username]' value=''>
+    <input type="text" name='user[username]' value='<%= @user.username %>'>
 
     </br>
     <label>Email:</label>
-    <input type="text" name='user[email]' value=''>
+    <input type="text" name='user[email]' value='<%= @user.email %>'>
 
     </br>
     <label>Password:</label>
-    <input type="password" name='user[password]' value=''>
-
+    <input type="password" name='user[password]'>
+<!-- 
     </br>
     <label>Location:</label>
-    <input type="text" name='user[location]' value=''>
+    <input type="text" name='user[location]' value='<%= @user.location %>'>
 
     </br>
     <label>Avatar image url:</label>
-    <input type="text" name='user[img]' value=''>
+    <input type="text" name='user[img]' value='<%= @user.img %>'>
 
     </br>
     <label>Tell us about yourself:</label>
-    <textarea name="user[details]" rows="4" cols="40"></textarea>
+    <textarea name="user[details]" rows="4" cols="40"><%= @user.details %></textarea> -->
     </br>
     <input type="submit" value="Signup">
 </form>
