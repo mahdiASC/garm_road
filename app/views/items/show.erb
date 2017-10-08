@@ -53,4 +53,8 @@
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Item">
   </form>
+<%elsif holder !=current_user%>
+    <form action="/items/<%=@item.id%>/request" method="post">
+      <input type="submit" value="Request">
+    </form>
 <%end%>
